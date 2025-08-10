@@ -1,5 +1,6 @@
 @import "tailwindcss";
-
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css"
 @theme {
   --color-primary: #151875;
   ---color-primary-dark: #0d134e;
@@ -19,6 +20,9 @@
   }
   .primary-btn:active {
     @apply bg-background-dark text-[17px] font-[700] py-4 px-10 rounded-[2px] scale-[0.9];
+  }
+  .container{
+  @apply container mx-auto max-w-[1080px];
   }
 }
 
