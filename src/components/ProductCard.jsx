@@ -4,12 +4,12 @@ import { CiHeart } from "react-icons/ci";
 
 function ProductCard({ data }) {
     return (
-        <div className='h-[266px] w-[360px] my-3 '>
+        <div className='h-[266px] w-[360px] my-3 ' onClick={() => console.log(data.id)}>
             <div className=' bg-[#F7F7F7] h-[230px] flex items-center justify-center group relative '>
                 <img src={data.image} className="h-[200px] aspect-square object-fit" alt="" />
                 <div className='hidden group-hover:flex flex-col gap-5 absolute  left-5 '>
-                    <div className='hover:bg-[#EEEFFB] p-2 rounded-full'><BsCart3 className='text-2xl' /> </div>
-                    <div className='hover:bg-[#EEEFFB] p-2 rounded-full'><CiHeart className='text-2xl' /> </div>
+                    <div className='hover:bg-[#EEEFFB] p-2 rounded-full'><BsCart3 className='text-2xl' onClick={(e)=>e.stopPropagation()} /> </div>
+                    <div className='hover:bg-[#EEEFFB] p-2 rounded-full'><CiHeart className='text-2xl'   onClick={(e)=>e.stopPropagation()}/> </div>
 
                 </div>
             </div>
