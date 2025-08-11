@@ -3,7 +3,7 @@ import SimpleSlider from './Slider'
 
 function Home() {
   return (
-    <div>
+    <div className='container'>
       <SimpleSlider/>
     </div>
   )
