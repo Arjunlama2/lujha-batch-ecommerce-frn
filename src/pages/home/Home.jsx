@@ -19,7 +19,7 @@ function Home() {
           </ul>
         </div>
 
-        <div className="grid justify-items-center text-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
+        <div className="grid justify-items-center text-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 my-8">
           {latestProducts.map((el, i) => (
             <ProductCard key={i} data={el} />
           ))}
