@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { act, useReducer, useState } from "react";
 import { CiMail } from "react-icons/ci";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
@@ -6,9 +6,13 @@ import { FaAngleDown, FaRegUser } from "react-icons/fa6";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
+
 
 function Header() {
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const user=useSelector((state)=>state.user)
 
   return (
     <header className=" text-white text-sm">
@@ -49,8 +53,12 @@ function Header() {
                 <FaAngleDown />
               </div>
               <div className="flex items-center gap-1 hover:text-secondary cursor-pointer transition">
-                <p>Login</p>
-                <FaRegUser />
+                {
+                  user.username ? <p>{user.username}</p> : <div className="flex items-center gap-1">
+                    <p>Login</p>
+                    <FaRegUser />
+                  </div>
+                }
               </div>
               <div className="flex items-center gap-1 hover:text-secondary cursor-pointer transition">
                 <p>Wishlist</p>
@@ -61,9 +69,9 @@ function Header() {
             {/* Cart Icon */}
             <div className="hover:bg-secondary h-[40px] w-[40px] md:h-[50px] md:w-[50px] flex items-center justify-center rounded transition relative">
               <FaShoppingCart />
-            <div className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full h-4 aspect-square flex items-center justify-center">
-              <span>10</span>
-            </div>
+              <div className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full h-4 aspect-square flex items-center justify-center">
+                <span>10</span>
+              </div>
             </div>
           </div>
         </div>
@@ -88,7 +96,7 @@ function Header() {
             placeholder="Search..."
             className="border rounded px-2 py-1 w-full max-w-xs"
           />
-          <button className="bg-secondary text-white px-3 py-1 rounded">
+          <button className="bg-secondary text-white px-3 py-1 rounded" onClick={() => dispatch({ type: "increment" })}>
             <BiSearchAlt2 />
           </button>
         </div>
@@ -100,6 +108,9 @@ function Header() {
         >
           {mobileMenuOpen ? <HiX /> : <HiMenuAlt3 />}
         </button>
+
+
+
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
