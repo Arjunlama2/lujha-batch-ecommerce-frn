@@ -64,7 +64,7 @@ function Login() {
         {/* Extra Links */}
         <p className="text-center text-sm mt-4">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-secondary hover:underline">
+          <Link to="/signup" className="text-secondary hover:underline">
             Sign up
           </Link>
         </p>

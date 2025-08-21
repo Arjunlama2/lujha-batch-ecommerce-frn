@@ -1,28 +1,39 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 function Register() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    role: "",
   });
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const res = await axios.post(`https://chaitra-ecommerce-backend.onrender.com/api/v1/user/signup`, formData)
+      toast.success("user signup successfully")
+      navigate("/login")
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+    } catch (err) {
+      console.log(err)
+      if(err.message){
+        toast.error(err.message)
+      }
+      toast.error(err.response.data.message)
     }
 
-    console.log("Signup Data:", formData);
-    // Here you can send signup request to backend
+
   };
 
   return (
@@ -36,8 +47,8 @@ function Register() {
             <label className="block mb-1 font-medium">Full Name</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               placeholder="Enter your full name"
               className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
@@ -75,16 +86,12 @@ function Register() {
 
           {/* Confirm Password */}
           <div>
-            <label className="block mb-1 font-medium">Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
-              required
-            />
+            <label className="block mb-1 font-medium">Role</label>
+            <select name="role" onChange={handleChange}>
+              <option value={"buyer"}>Buyer</option>
+              <option value={"seller"}>Seller</option>
+            </select>
+
           </div>
 
           {/* Submit */}
